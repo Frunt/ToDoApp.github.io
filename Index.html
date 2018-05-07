@@ -1,15 +1,146 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>ToDoApp</title>
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+      <style>#example{
+    margin: 0 auto;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+.btn.add {
+    background-color: #27ccc0;
+    color: white;
+    width: 110px;
+    height: 30px;
+    border: 1px solid #27ccc0;
+    border-radius: 5px;
+}
+.taskName{
+    padding: 5px;
+    border: solid 1px #d2d2d2;
+    height: 20px;
+    border-radius: 5px;
+    margin-right: 2%;
+    width: 63%;
+}
+.form{
+    margin-bottom: 3%;
+    margin-left: 5%;
+}
+.formContainer {
+    border: solid 1px #f2f2f2;
+    height: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 5%;
+    width: 30%;
+    background-color: white;
+}
+.task{
+    font-weight: bold;
+    height: 15%;
+    display: flex;
+    width: 93%;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-bottom: 3%;
+    cursor: pointer;
+}
+.task.notsel{
+    padding-left: 5%;
     
-      <link rel="stylesheet" type="text/css" href="css/css.css">
+}
+.task.sel{
+    padding-left: 2.83%;
+    border-left: 10px solid red;
+    
+}
+.delbtn{
+    background-color: white;
+    border: solid 1px #ff3159;
+    border-radius: 5px;
+    color: #ff6786;
+    width: 25%;
+}
+.delbtn:hover{
+    background-color: #ff3159;
+    color: white;
+}
+.commContainer{
+    border: solid 1px #f2f2f2;
+    height: auto;
+    width: 30%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    position: absolute;
+    left: 55%;
+    margin-top: 5%;
+    top: 0;
+    background-color: white;
+    padding-left: 2%;
+}
+.comnum{
+    background-color: #27ccc0;
+    color: white;
+    border-radius: 5px;
+    padding: 3px 5px;
+    width: 100px;
+    margin-left: 10px;
+}
+.separator{
+    display: block;
+    width: 90%;
+    background-color: #f2f2f2;
+    height: 2px;
+    margin: 0 auto;
+    margin-bottom: 2%;
+}
+.portrait{
+    width: 50px;
+    height: 50px;
+    background-color: #ff8a00;
+}
+.textportrait{
+    display: flex;
+    word-wrap: break-word;
+    height: auto;
+    align-items: flex-start;
+    margin-bottom: 2%;
+}
+.text{
+    width: 80%;
+    height: auto;
+    word-wrap: break-word;
+    font-weight: normal;
+    margin-left: 2%;
+    margin-top: 0;
+}
+.commpan{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+textarea{
+    resize: none;
+    width: 50%;
+}
+.addcom{
+    background-color: #27ccc0;
+    color: white;
+    border: 1px solid #27ccc0;
+    border-radius: 5px;
+    width: 22%;
+}</style>
   </head>
+    
   <body>
     <div id="example"></div>
     <script type="text/babel">
@@ -186,193 +317,4 @@
       </script>
     
   </body>
-=======
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>ToDoApp</title>
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-    
-      <link rel="stylesheet" type="text/css" href="css/css.css">
-  </head>
-  <body>
-    <div id="example"></div>
-    <script type="text/babel">
-        class Input extends React.Component{
-            constructor(props){
-                super(props);
-                this.addNewTask = this.addNewTask.bind(this);
-                this.picking = this.picking.bind(this);
-                this.deleteBlock = this.deleteBlock.bind(this);
-                this.addComment = this.addComment.bind(this);
-                this.state = {
-                    tasks: []
-                }
-            }
-            deleteBlock(i){
-                let arr = this.state.tasks;
-                arr.splice(i, 1);
-                this.setState({tasks: arr});
-            }
-            componentDidMount(){
-                localStorage.clear();
-                window.addEventListener('beforeunload', function (event) {
-                   for(let i = 0; i < this.state.tasks.length; i++){
-                       let json = JSON.stringify(this.state.tasks[i]);
-                       localStorage.setItem('task ' + i, json);
-                   } 
-                }.bind(this)) 
-            }
-            componentWillMount(){
-                if(localStorage.length){
-                    let arr = this.state.tasks;
-                    for(let i = 0; i<localStorage.length; i++){
-                        arr.push(JSON.parse(localStorage.getItem('task ' + i)));
-                    }
-                }
-            }
-            addComment(text, i){
-                let arr = this.state.tasks;
-                arr[i].comments.push(text);
-            }
-            picking(i){
-                let arr = this.state.tasks;
-                let newarr = arr.map((item, idx) => {
-                    item.selected = false;
-                    return item;
-                });
-                newarr[i].selected = true;
-                this.setState({tasks: newarr});
-            }
-            render(){
-                return (
-                    <div  className='formContainer'>
-                        <div className='form'>
-                            <h1>Items</h1>
-                            <form onSubmit={this.addNewTask}>
-                                <input className='taskName' type='text' placeholder='Type name here...' ref='taskName'></input>
-                                <button className='btn add'>Add new</button>
-                            </form>
-                        </div>
-                            {this.state.tasks.map((item, i) => <div  key={i+1}><Task comlen={this.state.tasks[i].comments} comments={this.state.tasks[i].comments} addComment={this.addComment} deleteBlock={this.deleteBlock} index={i} picking={this.picking} selected={item.selected} key={item.id}>{item.text}</Task><div  className='separator'></div></div>)}
-                    </div>
-                );
-            }
-            addNewTask(e){
-                if (this.refs.taskName.value.length){
-                e.preventDefault();
-                let arr = this.state.tasks;
-                let keyid = Date.now();
-                let newItem = {
-                    text: this.refs.taskName.value,
-                    selected: false,
-                    id: keyid,
-                    comments: []
-                };
-                arr.push(newItem);
-                this.refs.taskName.value = '';
-                this.setState({tasks: arr});
-                }   else e.preventDefault();
-            }
-            
-        }
-        class Task extends React.Component{
-            constructor(props){
-                super(props);
-                this.select = this.select.bind(this);
-                this.addComment = this.addComment.bind(this);
-                this.remove = this.remove.bind(this);
-                this.state = {
-                    selected: this.props.selected,
-                    comments: []
-                };
-            }
-            componentWillReceiveProps(nP){
-                this.setState({selected: nP.selected});
-            }
-            remove(){
-                this.props.deleteBlock(this.props.index);
-            }
-            rendSel(){
-                return (
-                    <div className='task sel'>
-                        <p  onClick={this.select}>{this.props.children}<span className='comnum'>{this.props.comlen.length}</span></p>
-                        <button className='delbtn' onClick={this.remove}>Delete</button>
-                        <div className='commContainer'>
-                            <h1>#2 Commentaries</h1>
-                            {this.props.comments.map((item, i) => <div key={i+1}><div className='textportrait' key={i}><div key={i+2} className='portrait'></div><p className='text'>{item}</p></div><div className='separator'></div></div>)}
-                            <Commentary addComment2={this.addComment} addComment={this.addComment}></Commentary>
-                        </div>
-                    </div>
-                );
-            }
-            rendNotSel(){
-                return (
-                            <div onClick={this.select} className='task notsel'>
-                                <p >{this.props.children}<span className='comnum'>{this.props.comlen.length}</span></p>
-                                <button className='delbtn' onClick={this.remove}>Delete</button>
-                            </div>
-                        
-                );
-            }
-            render(){
-                if (this.state.selected) return this.rendSel();
-                else return this.rendNotSel();
-            }
-            select(){
-                this.props.picking(this.props.index);
-                this.setState({selected: true});
-            }
-            addComment(text){
-                this.props.addComment(text, this.props.index);
-                let arr = this.state.comments;
-                arr.push(text);
-                this.setState({comments: arr});
-            }
-        }
-        class Commentary extends React.Component{
-            constructor(props){
-                super(props);
-                this.addComment = this.addComment.bind(this);
-                this.ctrlEnter = this.ctrlEnter.bind(this);
-            }
-            componentDidMount(){
-            document.addEventListener('keydown',this.ctrlEnter);
-            }
-            addComment(e){
-                if (this.refs.comm.value.length){
-                    e.preventDefault();
-                    this.props.addComment(this.refs.comm.value);
-                    this.refs.comm.value = '';
-                }   else e.preventDefault();
-            }
-            ctrlEnter(e){
-                if(e.keyCode===13 && e.ctrlKey){
-                    if (this.refs.comm.value.length) {
-                        this.props.addComment2(this.refs.comm.value);
-                        this.refs.comm.value = '';
-                    }
-                }
-            }
-            render(){
-                return (
-                    <div>
-                        <form className='commpan' onSubmit={this.addComment}>
-                            <div className='portrait'></div>
-                            <textarea ref='comm' placeholder='Write your commentary here'></textarea>
-                            <button className='addcom' onKeyPress={this.ctrlEnter}>Add commentary</button>
-                        </form>
-                    </div>
-                );
-            }
-        }
-        const app = document.getElementById('example');
-        ReactDOM.render(<Input /> , app);
-      </script>
-    
-  </body>
->>>>>>> 47a9bbe0629553ce842d8ac8c7fd70c86f6f3aeb
 </html>
